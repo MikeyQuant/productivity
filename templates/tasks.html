@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda+One">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <!--<link href='../css/overlay.css' rel="stylesheet">-->
+    <link href="{{ url_for('static', filename = 'overlay.css') }}" rel="stylesheet">
+    <!--<link href="/static/{{css}}.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'nav.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename = 'dopeLogoSmall.jpeg') }}" rel="shortcut icon" type="image/jpeg">
+    -->
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font: 16px Arial;
+}
+
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+</style>
+
+
+
+</head>
+<body>
+<main class="container" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xmlns="http://www.w3.org/1999/html">
+    </br>
+    </br></br>
+
+
+        <h1 >To-Do List!</h1>
+
+        <!--<form action="{{base}}/LogOut" method="post"><button type="submit" class="btn btn-danger">Log Out</button></form>
+     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#EditAccount">Edit Account</button>-->
+        <a type="button" class="btn btn-primary" href="{{BASE}}/logs">Logs</a>
+</br>
+    </br></br>
+    <div class="card-body" >
+<div class="shadow-lg p-3 mb-5 bg-white rounded">
+    <div class="card" >
+
+
+            <h2 class="card-title">To-Do's</h2>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add">Add Item</button>
+
+        <table class="table"><thead>
+   <tr><th scope="col">Date Added</th><th scope="col">Task</th><th scope="col">Done?</th></tr>
+    </thead>
+      <tbody>
+      <form action="{{BASE}}/save_task" method="post" target="sub">
+
+  {% for i in lst %}
+
+  <tr>
+      <td scope="row"><input type="hidden" value="{{i.dt}}" name="{{loop.index0}}d" id="{{loop.index0}}d">{{i.dt}}</td>
+      <td><input type="hidden" value="{{i.task}}" name="{{loop.index0}}" id="{{loop.index0}}">{{i.task}}</td>
+      <td><input name="{{loop.index0}}c" id="{{loop.index0}}c" type="checkbox" onchange="this.form.submit()" {{i.done}}>
+
+</td></tr>
+
+
+   {% endfor %}
+      </form>
+
+    </tbody>
+
+   </table>
+    </div></div></div>
+
+</main>
+<style>
+      #subframe {
+  display: none;}
+  </style>
+    <iframe display id="subframe" name="sub">
+
+</iframe>
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="addPromoterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" >Add To-Do Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <div class="modal-body">
+                          <form action="{{BASE}}/new_task" method="post" >
+
+                    <input type="text" id="task" name="task" placeholder="Enter New Task">
+                              <br><button type="submit" class="btn btn-success">
+                              Add Task!</button></form>
+
+                </div>
+                <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
