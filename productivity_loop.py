@@ -53,7 +53,7 @@ def main(base):
             while i<len(schedule)-1:
                 t=time.localtime()
                 if t.tm_hour == schedule[i] and t.tm_min == minute_interval:
-                    df=pd.read_csv("../activity_logs.csv", index_col=0)
+                    df=pd.read_csv("activity_logs.csv", index_col=0)
                     pd.concat([df,pd.DataFrame([[datetime.datetime.now().strftime("%Y-%m-%d %H:%M"),"Nothing"]],columns=df.columns,index=[len(df)])]).to_csv("activity_logs.csv")
                     text.start_text()
                     time.sleep(360)
@@ -61,3 +61,4 @@ def main(base):
                     i+=1
                 time.sleep(60)
             time.sleep(43200)
+main("https://54.198.186.121:8080")
