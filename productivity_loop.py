@@ -61,4 +61,4 @@ def main(base):
                     i+=1
                 time.sleep(60)
             time.sleep(43200)
-main("https://54.198.186.121:8080")
+main("http://52.23.240.197:8080")
