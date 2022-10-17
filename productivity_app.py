@@ -4,7 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash,json
 import pandas as pd
 import os
 app = Flask(__name__ )
-BASE="https://54.198.186.121:8080"
+BASE="http://52.23.240.197:8080"
 @app.route("/logs",methods=["GET"])
 def logs():
     df=pd.read_csv("activity_logs.csv", index_col=0).sort_values(by="Datetime", ascending=False)
