@@ -46,6 +46,7 @@ def main(base):
     while 1:
 
         t = time.localtime()
+        print("Out of loop",t)
         if t.tm_hour==9:
             minute_interval=random.randrange(0,59)
             schedule=[x for x in range(9,22,1)]
@@ -61,4 +62,5 @@ def main(base):
                     i+=1
                 time.sleep(60)
             time.sleep(43200)
+        sleep(60)
 main("http://52.23.240.197:8080")
